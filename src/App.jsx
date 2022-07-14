@@ -26,13 +26,20 @@ function App() {
   useEffect(() => {
     if (offer === null || availableFilters !== null) return;
     const materias = offer.map((o) => o.materia).filter(onlyUnique);
+    const modalidades = offer.map((o) => o.modalidad).filter(onlyUnique);
+    console.log(modalidades)
     setAvailableFilters([].concat(
       materias.map((m) => ({
         title: `materia: ${m}`,
         materia: m,
       }))
+    ).concat(
+      modalidades.map((m) => ({
+        title: `modalidad: ${m}`,
+        modalidad: m,
+      }))
     ));
-  }, [offer, availableFilters]);
+  }, [offer, availableFilters, setAvailableFilters]);
 
   return (
     <div className="App">

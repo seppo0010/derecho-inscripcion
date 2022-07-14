@@ -12,12 +12,16 @@ function Offer({ offer, filters }) {
   useEffect(() => {
     if (!offer) return;
     let newOffer = offer.slice(0);
-    const materiaFilter = filters.map((f) => f.materia);
+    const materiaFilter = filters.map((f) => f.materia).filter((f) => f !== undefined);
     if (materiaFilter.length) {
       newOffer = newOffer.filter((o) => materiaFilter.includes(o.materia))
     }
+    const modalidadFilter = filters.map((f) => f.modalidad).filter((f) => f !== undefined);
+    if (modalidadFilter.length) {
+      newOffer = newOffer.filter((o) => modalidadFilter.includes(o.modalidad))
+    }
     setFilteredOffer(newOffer)
-  }, [offer, filters, filteredOffer]);
+  }, [offer, filters, setFilteredOffer]);
   return (<div>
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
