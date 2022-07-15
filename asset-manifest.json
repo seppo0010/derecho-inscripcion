@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/derecho-inscripcion/static/css/main.6b720ac2.css",
+    "main.js": "/derecho-inscripcion/static/js/main.d94e388c.js",
+    "static/js/787.2467fd4e.chunk.js": "/derecho-inscripcion/static/js/787.2467fd4e.chunk.js",
+    "index.html": "/derecho-inscripcion/index.html",
+    "main.6b720ac2.css.map": "/derecho-inscripcion/static/css/main.6b720ac2.css.map",
+    "main.d94e388c.js.map": "/derecho-inscripcion/static/js/main.d94e388c.js.map",
+    "787.2467fd4e.chunk.js.map": "/derecho-inscripcion/static/js/787.2467fd4e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b720ac2.css",
+    "static/js/main.d94e388c.js"
+  ]
+}
