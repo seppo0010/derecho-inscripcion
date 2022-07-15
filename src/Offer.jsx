@@ -19,7 +19,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment)
 
 
-function Offer({ offer, filters, comments }) {
+function Offer({ offer, filters, comments, setFilters, availableFilters }) {
   const [filteredOffer, setFilteredOffer] = useState([]);
   const [open, setOpen] = useState(false);
   const [commentResults, setCommentResults] = useState([]);
@@ -42,6 +42,10 @@ function Offer({ offer, filters, comments }) {
     const horarioFilter = filters.map((f) => f.horario).filter((f) => f !== undefined);
     if (horarioFilter.length) {
       newOffer = newOffer.filter((o) => horarioFilter.includes(o.horario))
+    }
+    const comisionFilter = filters.map((f) => f.comision).filter((f) => f !== undefined);
+    if (comisionFilter.length) {
+      newOffer = newOffer.filter((o) => comisionFilter.includes(o.comision))
     }
     setFilteredOffer(newOffer)
   }, [offer, filters, setFilteredOffer]);
@@ -94,6 +98,8 @@ function Offer({ offer, filters, comments }) {
       selectable={false}
       events={filteredOffer.flatMap((o) => o.events)}
       style={{ height: 500 }}
+      onSelectEvent={(e) => { setFilters([...filters, availableFilters.find((f) => f.comision === e.comision)])
+     }}
     />
   <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">

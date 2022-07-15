@@ -16,6 +16,7 @@ function addEvents(offer) {
       return {
         id: `${i},${j}`,
         title: `${o.materia} - ${o.docente} (${o.modalidad})`,
+        comision: o.comision,
         start: new Date(2022, 7, 22 + {
           'Lun': 0,
           'Mar': 1,
@@ -74,6 +75,7 @@ function App() {
     const modalidades = offer.map((o) => o.modalidad).filter(onlyUnique);
     const docentes = offer.flatMap((o) => o.docente.split('-').map((d) => d.replace(/\s+.\.$/, ''))).filter(onlyUnique).sort();
     const horario = offer.map((o) => o.horario).filter(onlyUnique).sort();
+    const comision = offer.map((o) => o.comision).filter(onlyUnique).sort();
     setAvailableFilters([].concat(
       materias.map((m) => ({
         title: `materia: ${m}`,
@@ -94,6 +96,11 @@ function App() {
         title: `horario: ${d}`,
         horario: d,
       }))
+    ).concat(
+      comision.map((d) => ({
+        title: `comision: ${d}`,
+        comision: d,
+      }))
     ));
   }, [offer, availableFilters, setAvailableFilters]);
 
@@ -101,7 +108,7 @@ function App() {
     <div className="App">
       {loading && 'Loading...'}
       {offer && <Filters availableFilters={availableFilters} filters={filters} setFilters={setFilters} />}
-      {offer && <Offer offer={offer} filters={filters} comments={comments} />}
+      {offer && <Offer offer={offer} filters={filters} comments={comments} setFilters={setFilters} availableFilters={availableFilters} />}
     </div>
   );
 }
