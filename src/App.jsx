@@ -27,7 +27,8 @@ function App() {
     if (offer === null || availableFilters !== null) return;
     const materias = offer.map((o) => o.materia).filter(onlyUnique);
     const modalidades = offer.map((o) => o.modalidad).filter(onlyUnique);
-    const docentes = offer.flatMap((o) => o.docente.split('-').map((d) => d.replace(/\s+.\.$/, ''))).filter(onlyUnique);
+    const docentes = offer.flatMap((o) => o.docente.split('-').map((d) => d.replace(/\s+.\.$/, ''))).filter(onlyUnique).sort();
+    const horario = offer.map((o) => o.horario).filter(onlyUnique).sort();
     setAvailableFilters([].concat(
       materias.map((m) => ({
         title: `materia: ${m}`,
@@ -41,6 +42,11 @@ function App() {
     ).concat(
       docentes.map((d) => ({
         title: `docente: ${d}`,
+        docente: d,
+      }))
+    ).concat(
+      horario.map((d) => ({
+        title: `horario: ${d}`,
         docente: d,
       }))
     ));
