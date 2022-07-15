@@ -24,7 +24,6 @@ function Filters({ availableFilters, filters, setFilters }) {
             />
           ))
         }
-        style={{ width: 500 }}
         renderInput={(params) => (
           <TextField {...params} label="Filtros" />
         )}
