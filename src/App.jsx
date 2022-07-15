@@ -12,7 +12,7 @@ function onlyUnique(value, index, self) {
 function addEvents(offer) {
   offer.forEach((o, i) => {
     o.events = o.horario.split('-').map((h) => h.trim()).map((h, j) => {
-      const [_, day, startHour, startMinute, endHour, endMinute] = h.match(/(Lun|Mar|Mie|Jue|Vie|Sab) (?:([0-2][0-9]):(30|00)) a (?:([0-2][0-9]):(30|00))/)
+      const [day, startHour, startMinute, endHour, endMinute] = h.match(/(Lun|Mar|Mie|Jue|Vie|Sab) (?:([0-2][0-9]):(30|00)) a (?:([0-2][0-9]):(30|00))/).slice(1);
       return {
         id: `${i},${j}`,
         title: `${o.materia} - ${o.docente} (${o.modalidad})`,
