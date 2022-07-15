@@ -39,7 +39,7 @@ function Offer({ offer, filters, comments }) {
     if (docenteFilter.length) {
       newOffer = newOffer.filter((o) => o.docente.split('-').map((d) => d.replace(/\s+.\.$/, '')).some((v) => docenteFilter.includes(v)))
     }
-    const horarioFilter = filters.map((f) => f.modalidad).filter((f) => f !== undefined);
+    const horarioFilter = filters.map((f) => f.horario).filter((f) => f !== undefined);
     if (horarioFilter.length) {
       newOffer = newOffer.filter((o) => horarioFilter.includes(o.horario))
     }

@@ -92,7 +92,7 @@ function App() {
     ).concat(
       horario.map((d) => ({
         title: `horario: ${d}`,
-        docente: d,
+        horario: d,
       }))
     ));
   }, [offer, availableFilters, setAvailableFilters]);
