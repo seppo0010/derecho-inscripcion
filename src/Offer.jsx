@@ -42,8 +42,7 @@ function Offer({ offer, filters, comments }) {
 
   const handleClick = (docente) => {
     setOpen(true);
-    const res = comments.search(docente, { combineWith: 'AND' });
-    console.log(res);
+    const res = comments.search(docente.replace(/\s+.\.$/, ''), { combineWith: 'AND' });
     setCommentResults(res);
   }
   const handleClose = () => {
