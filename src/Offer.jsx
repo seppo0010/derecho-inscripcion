@@ -20,6 +20,10 @@ function Offer({ offer, filters }) {
     if (modalidadFilter.length) {
       newOffer = newOffer.filter((o) => modalidadFilter.includes(o.modalidad))
     }
+    const docenteFilter = filters.map((f) => f.docente).filter((f) => f !== undefined);
+    if (docenteFilter.length) {
+      newOffer = newOffer.filter((o) => o.docente.split('-').map((d) => d.replace(/\s+.\.$/, '')).some((v) => docenteFilter.includes(v)))
+    }
     setFilteredOffer(newOffer)
   }, [offer, filters, setFilteredOffer]);
   return (<div>
