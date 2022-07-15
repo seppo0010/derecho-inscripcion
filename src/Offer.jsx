@@ -12,6 +12,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+const localizer = momentLocalizer(moment)
+
 
 function Offer({ offer, filters, comments }) {
   const [filteredOffer, setFilteredOffer] = useState([]);
@@ -49,7 +55,6 @@ function Offer({ offer, filters, comments }) {
     setOpen(false);
     setCommentResults([]);
   };
-  
   return (<div>
   <Dialog
     onClose={handleClose}
@@ -79,6 +84,17 @@ function Offer({ offer, filters, comments }) {
       ) : 'Sin resultados'}
       </DialogContent>
   </Dialog>
+  <Calendar
+      localizer={localizer}
+      startAccessor="start"
+      endAccessor="end"
+      defaultDate={new Date(2022, 7, 22)}
+      defaultView='week'
+      drilldownView={null}
+      selectable={false}
+      events={filteredOffer.flatMap((o) => o.events)}
+      style={{ height: 500 }}
+    />
   <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
