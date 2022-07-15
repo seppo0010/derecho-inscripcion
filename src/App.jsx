@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import MiniSearch from 'minisearch'
 
 import './App.css';
 import Offer from './Offer';
@@ -13,6 +14,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [availableFilters, setAvailableFilters] = useState(null);
   const [filters, setFilters] = useState([]);
+  const [comments, setComments] = useState(null);
 
   useEffect(() => {
     if (offer !== null || loading === true) return
@@ -21,6 +23,20 @@ function App() {
       .then((r) => r.json())
       .then((r) => setOffer(r))
       .then(() => setLoading(false));
+    fetch(`${process.env.PUBLIC_URL}/data/comments.json`)
+      .then((r) => r.json())
+      .then((r) => {
+        const miniSearch = new MiniSearch({
+          fields: ['text'],
+          storeFields: ['text', 'shortcode'],
+        });
+        r.forEach(({ shortcode, comments }) => {
+          comments.forEach((text) => {
+            miniSearch.add({ text, shortcode, id: `${shortcode}${text}` });
+          });
+        });
+        setComments(miniSearch);
+      })
   }, [loading, offer]);
 
   useEffect(() => {
@@ -56,7 +72,7 @@ function App() {
     <div className="App">
       {loading && 'Loading...'}
       {offer && <Filters availableFilters={availableFilters} filters={filters} setFilters={setFilters} />}
-      {offer && <Offer offer={offer} filters={filters} />}
+      {offer && <Offer offer={offer} filters={filters} comments={comments} />}
     </div>
   );
 }
